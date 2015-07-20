@@ -10,6 +10,9 @@ import edu.ncsu.csc216.question_library.*;
 import java.util.List;
 
 public class MovieQuestions {
+	/*
+	 * This is a test
+	 */
     private int numCorrectAnswers;
     private int numAttemptQuestions;
     private static final String CORRECT = "Correct";
