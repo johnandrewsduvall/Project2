@@ -7,8 +7,14 @@
 package edu.ncsu.csc216.movie101.quiz;
 
 import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
+import edu.ncsu.csc216.question_library.*;
 
 public class MovieQuiz implements QuizMaster{
+    private QuestionReader reader;
+
+    public MovieQuiz(String filename) throws QuestionException {
+        this.reader = new QuestionReader(filename);
+    }
 
     /**
      * Are there any more questions remaining in this test?
@@ -16,7 +22,7 @@ public class MovieQuiz implements QuizMaster{
      */
     @Override
     public boolean hasMoreQuestions() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
     /**
@@ -26,30 +32,45 @@ public class MovieQuiz implements QuizMaster{
      */
     @Override
     public String getCurrentQuestionText() throws EmptyQuestionListException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
-    	/**
-	 * Get the possible answers for the current question
-	 * @return the possible answers for the current question -- each answer
-	 *         is a separate array element
-	 * * @throws EmptyQuestionListException if there is no current question
-	 */
+    /**
+     * Get the possible answers for the current question
+     * @return the possible answers for the current question -- each answer
+     *         is a separate array element
+     * * @throws EmptyQuestionListException if there is no current question
+     * @throws edu.ncsu.csc216.movie101.util.EmptyQuestionListException
+     */
     @Override
     public String[] getCurrentQuestionChoices() throws EmptyQuestionListException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+    * Process the user's answer to the current question.
+    * @param answer  the user's answer to the question
+    * @return the graded response to the question
+    * @throws EmptyQuestionListException if there is no current question
+    */
     @Override
     public String processAnswer(String answer) throws EmptyQuestionListException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+    * How many questions has the user answered correctly?
+    * @return the number of correct answers
+    */
     @Override
     public int getNumCorrectQuestions() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+    * How many questions has the user attempted to answer.
+    * @return the number of attempts
+    */
     @Override
     public int getNumAttemptedQuestions() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
