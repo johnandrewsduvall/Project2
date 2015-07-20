@@ -15,16 +15,16 @@ public class MovieQuestions {
 	 */
     private int numCorrectAnswers;
     private int numAttemptQuestions;
-    private static final String CORRECT = "Correct";
-    private static final String INCORRECT = "Incorrect";
-    private static final String SEPERATOR = " ";
-    public MovieQuestions(List<StandardQuestion> stdQues,List<ElementaryQuestion> elemQues,List<AdvancedQuestion> advQues)
-    {
-        
+    public static final String CORRECT = "Correct";
+    public static final String INCORRECT = "Incorrect";
+    public static final String SEPERATOR = " ";
+    public MovieQuestions(List<StandardQuestion> stdQues,List<ElementaryQuestion> elemQues,List<AdvancedQuestion> advQues) {
+        stdQues = new List<StandardQuestion>();
+        elemQues = new List<ElementarQuestion>();
+        advQues = new List<AdvancedQuestion>();
     }
-    public boolean hasMoreQuestions()
-    {
-        return false;
+    public boolean hasMoreQuestions() {
+        if()
     }
     public String getCurrentQuestionText()
     {
