@@ -5,10 +5,18 @@
  */
 package edu.ncsu.csc216.movie101.util;
 
-/**
- *
- * @author Alabastor
- */
 public class EmptyQuestionListException extends Exception{
+    private final String MESSAGE;
+    private final long serialVersionUID;
+    public EmptyQuestionListException()
+            {
+                MESSAGE = "ERROR";
+                serialVersionUID = 0;
+            }
+    public EmptyQuestionListException(String message)
+            {
+                MESSAGE = message;
+                serialVersionUID = 0;
+            }
     
 }
