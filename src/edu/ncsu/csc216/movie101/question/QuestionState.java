@@ -5,50 +5,59 @@
  */
 
 package edu.ncsu.csc216.movie101.question;
+import java.util.List;
 import java.util.list;
 
-public class QuestionState {
+import src.edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
+import edu.ncsu.csc216.question_library.Question;
+
+public abstract class QuestionState {
 	
-	private static final int FRONT;
+	private static final int FRONT = 0;
 	
-	public QuestionState(List<Question> questionList) {
-		questionList = new List<Question>();
+	private Question currentQuestion;
+	private List<Question> questions;
+	public QuestionState(List<Question> questions) {
+		this.questions = questions;
 	}
     
-	public abstract String processAnswer(String ans) {
-		//todo
-		return null
-	}
+	public abstract String processAnswer(String ans);
 	
 	public boolean hasMoreQuestions() {
-		if(questionList.hasNext() == true) {
+		if(questions.iterator().hasNext() == true) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	public String getCurrentQuestionText() {
+	public String getCurrentQuestionText() throws EmptyQuestionListException {
+		return currentQuestion.toString();
+	}
+	
+	
+	public String[] getCurrentQuestionChoices() throws EmptyQuestionListException {
+		String[] questionChoices = new String[4];
+		questionChoices[0] = currentQuestion.getChoiceA();
+		questionChoices[1] = currentQuestion.getChoiceB();
+		questionChoices[2] = currentQuestion.getChoiceC();
+		questionChoices[3] = currentQuestion.getChoiceD();
 		
+		return questionChoices;
 	}
 	
-	public String[] getCurrentQuestionChoices() {
-		//todo
-		return null
+	public String getCurrentQuestionAnswer() throws EmptyQuestionListException {
+		
+		return currentQuestion.getAnswer();
 	}
 	
-	public String getCurrentQuestionAnswer() {
-		//todo
-		return null
-	}
-	
-	public Question getCurrentQuestion() {
-		//todo
-		return null
+	public Question getCurrentQuestion() throws EmptyQuestionListException {
+		
+		return currentQuestion;
 	}
 	
 	public void nextQuestion() {
-		//todo
+		questions.iterator().next();
 	}
 	
 	
