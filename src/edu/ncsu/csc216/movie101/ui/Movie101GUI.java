@@ -10,12 +10,11 @@ import edu.ncsu.csc216.movie101.quiz.*;
 import edu.ncsu.csc216.question_library.QuestionException;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Scanner;
 import javax.swing.*;
 
 public class Movie101GUI  extends JFrame implements ActionListener{
 
-    private MovieQuiz quiz;
+    private QuizMaster quiz;
     
     private static final int FRAME_WIDTH = 500;
     private static final int FRAME_HEIGHT = 600;
@@ -30,10 +29,17 @@ public class Movie101GUI  extends JFrame implements ActionListener{
     private JButton btnNext = new JButton(NEXT);
     private JButton btnQuit = new JButton(QUIT);
     
-    private JRadioButton answer1;
-    private JRadioButton answer2;
-    private JRadioButton answer3;
-    private JRadioButton answer4;
+    private JRadioButton btnAnswer1;
+    private JRadioButton btnAnswer2;
+    private JRadioButton btnAnswer3;
+    private JRadioButton btnAnswer4;
+    
+    private JLabel question;
+    private JLabel hint;
+    private JLabel labelAnswer1;
+    private JLabel labelAnswer2;
+    private JLabel labelAnswer3;
+    private JLabel labelAnswer4;
     
     private Container window = getContentPane();
     
@@ -63,10 +69,26 @@ public class Movie101GUI  extends JFrame implements ActionListener{
         {
             JOptionPane.showMessageDialog(new JFrame(), iae.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
         }
-        
+        initializeUI();
     }
     private void initializeUI()
     {
+        setSize(WIDTH,HEIGHT);
+        setTitle(TITLE);
+        
+        window.add(question);
+        window.add(btnAnswer1);
+        window.add(labelAnswer1);
+        window.add(btnAnswer2);
+        window.add(labelAnswer2);
+        window.add(btnAnswer3);
+        window.add(labelAnswer3);
+        window.add(btnAnswer4);
+        window.add(labelAnswer4);
+        window.add(hint);
+        
+        window.add(btnNext);
+        window.add(btnQuit);
         window.add(btnSubmit);
         setVisible(true);
     }

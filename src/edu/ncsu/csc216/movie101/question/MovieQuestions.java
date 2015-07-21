@@ -20,12 +20,13 @@ public class MovieQuestions {
     public static final String SEPERATOR = " ";
     public MovieQuestions(List<StandardQuestion> stdQues,List<ElementaryQuestion> elemQues,List<AdvancedQuestion> advQues) {
         stdQues = new List<StandardQuestion>();
-        elemQues = new List<ElementarQuestion>();
+        elemQues = new List<ElementaryQuestion>();
         advQues = new List<AdvancedQuestion>();
     }
     public boolean hasMoreQuestions() {
-        if()
+        return false;
     }
+    
     public String getCurrentQuestionText()
     {
         return null;
@@ -33,6 +34,18 @@ public class MovieQuestions {
     public String[] getCurrentQuestionChoices()
     {
         return null;
+    }
+
+    public String processAnswer(String answer) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getNumCorrectQuestions() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getNumAttemptedQuestions() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

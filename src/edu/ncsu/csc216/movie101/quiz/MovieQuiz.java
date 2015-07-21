@@ -6,14 +6,17 @@
 
 package edu.ncsu.csc216.movie101.quiz;
 
+import edu.ncsu.csc216.movie101.question.*;
 import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
 import edu.ncsu.csc216.question_library.*;
 
 public class MovieQuiz implements QuizMaster{
     private QuestionReader reader;
+    private MovieQuestions questions;
 
     public MovieQuiz(String filename) throws QuestionException {
-        this.reader = new QuestionReader(filename);
+        reader = new QuestionReader(filename);
+        questions = new MovieQuestions(reader.getStandardQuestions(),reader.getElementaryQuestions(),reader.getAdvancedQuestions());
     }
 
     /**
@@ -32,7 +35,7 @@ public class MovieQuiz implements QuizMaster{
      */
     @Override
     public String getCurrentQuestionText() throws EmptyQuestionListException {
-        return null;
+        return questions.getCurrentQuestionText();
     }
 
     /**
@@ -44,7 +47,7 @@ public class MovieQuiz implements QuizMaster{
      */
     @Override
     public String[] getCurrentQuestionChoices() throws EmptyQuestionListException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return questions.getCurrentQuestionChoices();
     }
 
     /**
@@ -55,7 +58,7 @@ public class MovieQuiz implements QuizMaster{
     */
     @Override
     public String processAnswer(String answer) throws EmptyQuestionListException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return questions.processAnswer(answer);
     }
 
     /**
@@ -64,7 +67,7 @@ public class MovieQuiz implements QuizMaster{
     */
     @Override
     public int getNumCorrectQuestions() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return questions.getNumCorrectQuestions();
     }
 
     /**
@@ -73,7 +76,8 @@ public class MovieQuiz implements QuizMaster{
     */
     @Override
     public int getNumAttemptedQuestions() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return questions.getNumAttemptedQuestions();
+                
     }
     
 }
