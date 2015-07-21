@@ -6,9 +6,8 @@
 
 package edu.ncsu.csc216.movie101.question;
 import java.util.List;
-import java.util.list;
 
-import src.edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
+import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
 import edu.ncsu.csc216.question_library.Question;
 
 public abstract class QuestionState {

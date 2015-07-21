@@ -7,9 +7,12 @@
 package edu.ncsu.csc216.movie101.ui;
 
 import edu.ncsu.csc216.movie101.quiz.*;
+import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
 import edu.ncsu.csc216.question_library.QuestionException;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class Movie101GUI  extends JFrame implements ActionListener{
@@ -75,6 +78,20 @@ public class Movie101GUI  extends JFrame implements ActionListener{
     {
         setSize(WIDTH,HEIGHT);
         setTitle(TITLE);
+        
+        try {
+            String[] answers = quiz.getCurrentQuestionChoices();
+            question = new JLabel(quiz.getCurrentQuestionText());
+            labelAnswer1 = new JLabel(answers[0]);
+            labelAnswer2 = new JLabel(answers[1]);
+            labelAnswer3 = new JLabel(answers[2]);
+            labelAnswer4 = new JLabel(answers[3]);
+            hint = new JLabel(" ");
+            
+        } catch (EmptyQuestionListException ex) {
+            JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
+        }
+        
         
         window.add(question);
         window.add(btnAnswer1);
