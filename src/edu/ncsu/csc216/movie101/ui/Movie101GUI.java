@@ -11,8 +11,6 @@ import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
 import edu.ncsu.csc216.question_library.QuestionException;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 public class Movie101GUI  extends JFrame implements ActionListener{
@@ -26,7 +24,7 @@ public class Movie101GUI  extends JFrame implements ActionListener{
     private static final String SUBMIT = "Submit Answer";
     private static final String NEXT = "Next Question";
     private static final String QUIT = "Quit";
-    private static final String ERROR = "Error";
+    private static final String QUIZ_ERROR = "Error";
     
     private JButton btnSubmit = new JButton(SUBMIT);
     private JButton btnNext = new JButton(NEXT);
@@ -70,13 +68,13 @@ public class Movie101GUI  extends JFrame implements ActionListener{
         }
         catch(IllegalArgumentException | QuestionException iae)
         {
-            JOptionPane.showMessageDialog(new JFrame(), iae.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), iae.getMessage(), QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
         }
         initializeUI();
     }
     private void initializeUI()
     {
-        setSize(WIDTH,HEIGHT);
+        setSize(FRAME_WIDTH,FRAME_HEIGHT);
         setTitle(TITLE);
         
         try {
@@ -89,7 +87,7 @@ public class Movie101GUI  extends JFrame implements ActionListener{
             hint = new JLabel(" ");
             
         } catch (EmptyQuestionListException ex) {
-            JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
         }
         
         

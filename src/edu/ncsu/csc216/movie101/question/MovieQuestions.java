@@ -7,6 +7,7 @@
 package edu.ncsu.csc216.movie101.question;
 
 import edu.ncsu.csc216.question_library.*;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MovieQuestions {
@@ -18,10 +19,10 @@ public class MovieQuestions {
     public static final String CORRECT = "Correct";
     public static final String INCORRECT = "Incorrect";
     public static final String SEPERATOR = " ";
-    public MovieQuestions(List<StandardQuestion> stdQues,List<ElementaryQuestion> elemQues,List<AdvancedQuestion> advQues) {
-        stdQues = new List<StandardQuestion>();
-        elemQues = new List<ElementaryQuestion>();
-        advQues = new List<AdvancedQuestion>();
+    public MovieQuestions(LinkedList<StandardQuestion> stdQues,LinkedList<ElementaryQuestion> elemQues,LinkedList<AdvancedQuestion> advQues) {
+        stdQues = new LinkedList<StandardQuestion>();
+        elemQues = new LinkedList<ElementaryQuestion>();
+        advQues = new LinkedList<AdvancedQuestion>();
     }
     public boolean hasMoreQuestions() {
         return false;
