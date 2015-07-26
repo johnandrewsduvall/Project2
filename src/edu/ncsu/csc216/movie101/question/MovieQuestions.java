@@ -19,7 +19,7 @@ public class MovieQuestions {
     public static final String CORRECT = "Correct";
     public static final String INCORRECT = "Incorrect";
     public static final String SEPERATOR = " ";
-    public MovieQuestions(LinkedList<StandardQuestion> stdQues,LinkedList<ElementaryQuestion> elemQues,LinkedList<AdvancedQuestion> advQues) {
+    public MovieQuestions(List<StandardQuestion> stdQues,List<ElementaryQuestion> elemQues,List<AdvancedQuestion> advQues) {
         stdQues = new LinkedList<StandardQuestion>();
         elemQues = new LinkedList<ElementaryQuestion>();
         advQues = new LinkedList<AdvancedQuestion>();

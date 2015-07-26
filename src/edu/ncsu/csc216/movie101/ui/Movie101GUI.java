@@ -13,12 +13,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Movie101GUI  extends JFrame implements ActionListener{
+public class Movie101GUI  extends JFrame
+{
 
     private QuizMaster quiz;
     
-    private static final int FRAME_WIDTH = 500;
-    private static final int FRAME_HEIGHT = 600;
+    
+    private static final int FRAME_WIDTH = 600;
+    private static final int FRAME_HEIGHT = 300;
     
     private static final String TITLE = "Movies 101";
     private static final String SUBMIT = "Submit Answer";
@@ -26,10 +28,13 @@ public class Movie101GUI  extends JFrame implements ActionListener{
     private static final String QUIT = "Quit";
     private static final String QUIZ_ERROR = "Error";
     
+    private final JLabel SPACER = new JLabel(" ");
+    
     private JButton btnSubmit = new JButton(SUBMIT);
     private JButton btnNext = new JButton(NEXT);
     private JButton btnQuit = new JButton(QUIT);
     
+    private String[] answers = new String[4];
     private JRadioButton btnAnswer1;
     private JRadioButton btnAnswer2;
     private JRadioButton btnAnswer3;
@@ -37,12 +42,8 @@ public class Movie101GUI  extends JFrame implements ActionListener{
     
     private JLabel question;
     private JLabel hint;
-    private JLabel labelAnswer1;
-    private JLabel labelAnswer2;
-    private JLabel labelAnswer3;
-    private JLabel labelAnswer4;
     
-    private Container window = getContentPane();
+    private Container window ;
     
     public Movie101GUI(String filename)
     {
@@ -74,9 +75,14 @@ public class Movie101GUI  extends JFrame implements ActionListener{
     }
     private void initializeUI()
     {
+        
         setSize(FRAME_WIDTH,FRAME_HEIGHT);
         setTitle(TITLE);
+        window = getContentPane();
+        window.setLayout(new GridLayout(0,3,10,10));
         
+        
+        /*
         try {
             String[] answers = quiz.getCurrentQuestionChoices();
             question = new JLabel(quiz.getCurrentQuestionText());
@@ -89,41 +95,88 @@ public class Movie101GUI  extends JFrame implements ActionListener{
         } catch (EmptyQuestionListException ex) {
             JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
         }
+        */
+        //Test Strings
+        answers[0] = "Answer 1";
+        answers[1] = "Answer 2";
+        answers[2] = "Answer 3";
+        answers[3] = "Answer 4";
+        
+        question = new JLabel("Question!");
+        btnAnswer1 = new JRadioButton(answers[0]);
+        btnAnswer2 = new JRadioButton(answers[1]);
+        btnAnswer3 = new JRadioButton(answers[2]);
+        btnAnswer4 = new JRadioButton(answers[3]);
+        hint = new JLabel(" ");
+        
+        
         
         
         window.add(question);
+        
         window.add(btnAnswer1);
-        window.add(labelAnswer1);
         window.add(btnAnswer2);
-        window.add(labelAnswer2);
         window.add(btnAnswer3);
-        window.add(labelAnswer3);
         window.add(btnAnswer4);
-        window.add(labelAnswer4);
+        
         window.add(hint);
         
         window.add(btnNext);
         window.add(btnQuit);
         window.add(btnSubmit);
+        
+        ButtonGroup ansBtnGroup = new ButtonGroup();
+        ansBtnGroup.add(btnNext);
+        ansBtnGroup.add(btnQuit);
+        ansBtnGroup.add(btnSubmit);
+        
+        ButtonHandler btnHandler = new ButtonHandler();
+        
+        btnNext.addActionListener(btnHandler);
+        btnQuit.addActionListener(btnHandler);
+        btnSubmit.addActionListener(btnHandler);
+        
         setVisible(true);
     }
     
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        if(ae.getSource().equals(btnSubmit))
-        {
-            //Submit logic
+    private void refreshWindow()
+    {
+        question.setText("New Question");
+        btnAnswer1.setText("New Answer 1");
+        btnAnswer2.setText("New Answer 2");
+        btnAnswer3.setText("New Answer 3");
+        btnAnswer4.setText("New Answer 4");
+        
+    }
+    
+    private class ButtonHandler implements ActionListener, ItemListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if(ae.getSource().equals(btnSubmit))
+            {
+                try {
+                    quiz.processAnswer(TITLE);
+                } catch (EmptyQuestionListException ex) {
+                    JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
+                }
+            }
+            if(ae.getSource().equals(btnNext))
+            {
+                refreshWindow();
+            }
+            if(ae.getSource().equals(btnQuit))
+            {
+                stopExecution();
+            }
         }
-        if(ae.getSource().equals(btnNext))
-        {
-            //Next button logic
-        }
-        if(ae.getSource().equals(btnQuit))
-        {
-            stopExecution();
+
+        @Override
+        public void itemStateChanged(ItemEvent ie) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
-    //ADDITION!
+    
 
     private static void stopExecution() {
         System.exit(0);
@@ -131,19 +184,25 @@ public class Movie101GUI  extends JFrame implements ActionListener{
     
     public static void main(String [] args)
     {
+        Movie101GUI mv101;
         try
         {
+            
             if(args.length > 0)
             {
-                new Movie101GUI(args[0]);
+                mv101 = new Movie101GUI(args[0]);
             }
             else
-                new Movie101GUI(null);
+            {
+                mv101 = new Movie101GUI(null);
+            }
+            mv101.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
         catch(IllegalArgumentException iae)
         {
             JOptionPane.showMessageDialog(new JFrame(), "Incorrect Quiz File Selected");
             stopExecution();
         }
+        
     }
 }
