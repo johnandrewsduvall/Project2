@@ -7,25 +7,27 @@
 package edu.ncsu.csc216.movie101.quiz;
 
 import edu.ncsu.csc216.movie101.question.*;
+import edu.ncsu.csc216.movie101.quiz.QuizMaster;
 import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
 import edu.ncsu.csc216.question_library.*;
 
 public class MovieQuiz implements QuizMaster{
     private QuestionReader reader;
     private MovieQuestions questions;
-
     public MovieQuiz(String filename) throws QuestionException {
         reader = new QuestionReader(filename);
-        questions = new MovieQuestions(reader.getStandardQuestions(),reader.getElementaryQuestions(),reader.getAdvancedQuestions());
     }
 
     /**
      * Are there any more questions remaining in this test?
      * @return true if there are, false if there are not
      */
-    @Override
     public boolean hasMoreQuestions() {
-        return false;
+        if(questions.hasMoreQuestions() != true) {
+        	return false;
+        } else {
+        	return true;
+        }
     }
 
     /**
@@ -33,7 +35,6 @@ public class MovieQuiz implements QuizMaster{
      * @return the current question text
      * @throws EmptyQuestionListException if there is no current question
      */
-    @Override
     public String getCurrentQuestionText() throws EmptyQuestionListException {
         return questions.getCurrentQuestionText();
     }
@@ -45,9 +46,8 @@ public class MovieQuiz implements QuizMaster{
      * * @throws EmptyQuestionListException if there is no current question
      * @throws edu.ncsu.csc216.movie101.util.EmptyQuestionListException
      */
-    @Override
     public String[] getCurrentQuestionChoices() throws EmptyQuestionListException {
-        return questions.getCurrentQuestionChoices();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -56,16 +56,13 @@ public class MovieQuiz implements QuizMaster{
     * @return the graded response to the question
     * @throws EmptyQuestionListException if there is no current question
     */
-    @Override
     public String processAnswer(String answer) throws EmptyQuestionListException {
         return questions.processAnswer(answer);
     }
-
     /**
     * How many questions has the user answered correctly?
     * @return the number of correct answers
     */
-    @Override
     public int getNumCorrectQuestions() {
         return questions.getNumCorrectQuestions();
     }
@@ -74,10 +71,9 @@ public class MovieQuiz implements QuizMaster{
     * How many questions has the user attempted to answer.
     * @return the number of attempts
     */
-    @Override
     public int getNumAttemptedQuestions() {
-        return questions.getNumAttemptedQuestions();
-                
+       return questions.getNumAttemptedQuestions();
     }
     
 }
+
