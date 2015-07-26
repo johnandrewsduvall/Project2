@@ -20,7 +20,7 @@ public abstract class QuestionState {
 		this.questions = questions;
 	}
     
-	public abstract String processAnswer(String ans);
+	public abstract String processAnswer(String ans) throws EmptyQuestionListException;
 	
 	public boolean hasMoreQuestions() {
 		if(questions.iterator().hasNext() == true) {
@@ -37,7 +37,7 @@ public abstract class QuestionState {
 	
 	public String[] getCurrentQuestionChoices() throws EmptyQuestionListException {
 		String[] questionChoices = new String[4];
-		questionChoices[0] = currentQuestion.getChoiceA();
+		questionChoices[FRONT] = currentQuestion.getChoiceA();
 		questionChoices[1] = currentQuestion.getChoiceB();
 		questionChoices[2] = currentQuestion.getChoiceC();
 		questionChoices[3] = currentQuestion.getChoiceD();
@@ -61,3 +61,4 @@ public abstract class QuestionState {
 	
 	
 }
+
