@@ -42,7 +42,7 @@ public class Movie101GUI  extends JFrame
     private JRadioButton btnAnswer4;
     
     private JLabel question;
-    private JLabel hint;
+    private JLabel messageLabel;
     
     private Container window ;
     
@@ -84,26 +84,27 @@ public class Movie101GUI  extends JFrame
         
         
         
-        try {
-            String[] answers = quiz.getCurrentQuestionChoices();
-            question = new JLabel(quiz.getCurrentQuestionText());
-            hint = new JLabel(" ");
-            
+        /*try {
+        String[] answers = quiz.getCurrentQuestionChoices();
+        question = new JLabel(quiz.getCurrentQuestionText());
+        hint = new JLabel(" ");
+        
         } catch (EmptyQuestionListException ex) {
-            JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
-        }
+        JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
+        }*/
         
         //Test Strings
-        /*answers[0] = "Answer 1";
+        question = new JLabel("Question");
+        answers[0] = "Answer 1";
         answers[1] = "Answer 2";
         answers[2] = "Answer 3";
-        answers[3] = "Answer 4";*/
+        answers[3] = "Answer 4";
         
         btnAnswer1 = new JRadioButton(answers[0]);
         btnAnswer2 = new JRadioButton(answers[1]);
         btnAnswer3 = new JRadioButton(answers[2]);
         btnAnswer4 = new JRadioButton(answers[3]);
-        hint = new JLabel(" ");
+        messageLabel = new JLabel(" ");
         
         
         
@@ -115,12 +116,14 @@ public class Movie101GUI  extends JFrame
         window.add(btnAnswer3);
         window.add(btnAnswer4);
         
-        window.add(hint);
+        window.add(messageLabel);
         
         ButtonGroup pushBtnGroup = new ButtonGroup();
         pushBtnGroup.add(btnNext);
         pushBtnGroup.add(btnQuit);
         pushBtnGroup.add(btnSubmit);
+        btnNext.setEnabled(false);
+        btnSubmit.setEnabled(false);
         
         window.add(btnNext);
         window.add(btnQuit);
@@ -137,6 +140,10 @@ public class Movie101GUI  extends JFrame
         btnNext.addActionListener(btnHandler);
         btnQuit.addActionListener(btnHandler);
         btnSubmit.addActionListener(btnHandler);
+        btnAnswer1.addActionListener(btnHandler);
+        btnAnswer2.addActionListener(btnHandler);
+        btnAnswer3.addActionListener(btnHandler);
+        btnAnswer4.addActionListener(btnHandler);
         
         setVisible(true);
     }
@@ -149,7 +156,9 @@ public class Movie101GUI  extends JFrame
         btnAnswer2.setText("New Answer 2");
         btnAnswer3.setText("New Answer 3");
         btnAnswer4.setText("New Answer 4");
-        
+        messageLabel.setText(" ");
+        btnNext.setEnabled(false);
+        btnSubmit.setEnabled(false);
     }
     
     private class ButtonHandler implements ActionListener, ItemListener
@@ -158,39 +167,51 @@ public class Movie101GUI  extends JFrame
         public void actionPerformed(ActionEvent ae) {
             if(ae.getSource().equals(btnSubmit))
             {
-                try {
-                    quiz.processAnswer(TITLE);
+                messageLabel.setText("Correct!");
+                btnNext.setEnabled(true);
+                btnSubmit.setEnabled(false);
+                /*try {
+                quiz.processAnswer(TITLE);
                 } catch (EmptyQuestionListException ex) {
-                    JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
-                }
+                JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
+                }*/
             }
+            //Actions for the "Next" Button 
             if(ae.getSource().equals(btnNext))
             {
                 refreshWindow();
             }
+            //Actions for the "Quit" button
             if(ae.getSource().equals(btnQuit))
             {
+                JOptionPane.showMessageDialog(new JFrame("End of Quiz"), "You Answered "+0+ " questions correctly out of a possible " +0);
+                //JOptionPane.showMessageDialog(new JFrame("End of Quiz"), "You Answered "+quiz.getNumCorrectQuestions()+ " questions correctly out of  possible" +quiz.getNumAttemptedQuestions());
                 stopExecution();
             }
         }
 
         @Override
         public void itemStateChanged(ItemEvent ie) {
+            
             if(ie.getSource()==btnAnswer1)
             {
                 selectedAnswer = answers[0];
+                btnSubmit.setEnabled(true);
             }
             else if(ie.getSource()==btnAnswer2)
             {
                 selectedAnswer = answers[1];
+                btnSubmit.setEnabled(true);
             }
             else if(ie.getSource()==btnAnswer3)
             {
                 selectedAnswer = answers[2];
+                btnSubmit.setEnabled(true);
             }
             else if(ie.getSource()==btnAnswer4)
             {
                 selectedAnswer = answers[3];
+                btnSubmit.setEnabled(true);
             }
         }
     }

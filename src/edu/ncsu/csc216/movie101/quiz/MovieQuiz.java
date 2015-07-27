@@ -7,7 +7,6 @@
 package edu.ncsu.csc216.movie101.quiz;
 
 import edu.ncsu.csc216.movie101.question.*;
-import edu.ncsu.csc216.movie101.quiz.QuizMaster;
 import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
 import edu.ncsu.csc216.question_library.*;
 
