@@ -16,8 +16,15 @@ public abstract class QuestionState {
 	
 	private Question currentQuestion;
 	private List<Question> questions;
+	
+	public QuestionState() {
+		
+	}
+	
 	public QuestionState(List<Question> questions) {
 		this.questions = questions;
+		currentQuestion = questions.get(FRONT);
+		
 	}
     
 	public abstract String processAnswer(String ans) throws EmptyQuestionListException;
@@ -61,4 +68,3 @@ public abstract class QuestionState {
 	
 	
 }
-

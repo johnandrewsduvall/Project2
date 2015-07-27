@@ -12,9 +12,9 @@ import edu.ncsu.csc216.question_library.*;
 import java.util.List;
 
 public class MovieQuestions {
-	private StandardQuestionState stdState;
-	private AdvancedQuestionState advState;
-	private ElementaryQuestionState elemState;
+	private QuestionState stdState;
+	private QuestionState advState;
+	private QuestionState elemState;
 	private QuestionState state;
     private int numCorrectAnswers;
     private int numAttemptQuestions;
@@ -22,7 +22,10 @@ public class MovieQuestions {
     public static final String INCORRECT = "Incorrect";
     public static final String SEPERATOR = " ";
     public MovieQuestions(List<StandardQuestion> stdQues,List<ElementaryQuestion> elemQues,List<AdvancedQuestion> advQues) {
-    	
+    	stdState = new StandardQuestionState(stdQues);
+    	elemState = new ElementaryQuestionState(elemQues);
+    	advState = new AdvancedQuestionState(advQues);
+    	state = stdState;
     }
     public boolean hasMoreQuestions() {
         return state.hasMoreQuestions();
@@ -58,8 +61,7 @@ public class MovieQuestions {
 
     public class AdvancedQuestionState extends QuestionState {
     	private List<AdvancedQuestion> advQuestions;
-		public AdvancedQuestionState(List<Question> questions, List<AdvancedQuestion> advQuestions) {
-			super(questions);
+		public AdvancedQuestionState(List<AdvancedQuestion> advQuestions) {
 			this.advQuestions = advQuestions;
 		}
 
@@ -78,10 +80,11 @@ public class MovieQuestions {
     }
     public class StandardQuestionState extends QuestionState {
     	private int numCorrectInARow;
-    	private List<StandardQuestion> stdQuestions;
-		public StandardQuestionState(List<Question> questions, List<StandardQuestion> stdQuestions) {
-			super(questions);
-			this.stdQuestions = stdQuestions;
+    	private List<Question> stdQuestions;
+		public StandardQuestionState(List<StandardQuestion> stdQuestions) {
+			for(int i = 0; i < stdQuestions.size(); i++) {
+				this.stdQuestions.add(i, stdQuestions.get(i));
+			}
 		}
 
 		
@@ -108,9 +111,10 @@ public class MovieQuestions {
     	private int attempts;
     	private int numCorrectInARow;
     	private List<ElementaryQuestion> elemQuestions;
-    	public ElementaryQuestionState(List<Question> questions, List<ElementaryQuestion> elemQuestions) {
-			super(questions);
+    	public ElementaryQuestionState(List<ElementaryQuestion> elemQuestions) {
+			
 			this.elemQuestions = elemQuestions;
+			
 		}
 
 		
