@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * @Author: John Andrew S Duvall
+ * Date: 27 July 2015
+ * Project: CSC 216 Project 2, Part 2
  */
 
 package edu.ncsu.csc216.movie101.ui;
@@ -13,11 +13,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+ * The GUI for Movie Quiz 101
+ * 
+ */
 public class Movie101GUI  extends JFrame
 {
-
+    //Variable Declaration
     private QuizMaster quiz;
-    
     
     private static final int FRAME_WIDTH = 600;
     private static final int FRAME_HEIGHT = 300;
@@ -46,6 +49,7 @@ public class Movie101GUI  extends JFrame
     
     private Container window ;
     
+    //Constructor, if the user send the filename in the command line argument, the filename is used.  Otherwise, a file chooser is opened for the user to selection the question xml file.
     public Movie101GUI(String filename)
     {
         try
@@ -74,6 +78,7 @@ public class Movie101GUI  extends JFrame
         }
         initializeUI();
     }
+    //Initial build of GUI
     private void initializeUI()
     {
         
@@ -84,21 +89,21 @@ public class Movie101GUI  extends JFrame
         
         
         
-        /*try {
+        try {
         String[] answers = quiz.getCurrentQuestionChoices();
         question = new JLabel(quiz.getCurrentQuestionText());
-        hint = new JLabel(" ");
+        messageLabel = new JLabel(" ");
         
         } catch (EmptyQuestionListException ex) {
         JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
-        }*/
+        }
         
         //Test Strings
-        question = new JLabel("Question");
+        /*question = new JLabel("Question");
         answers[0] = "Answer 1";
         answers[1] = "Answer 2";
         answers[2] = "Answer 3";
-        answers[3] = "Answer 4";
+        answers[3] = "Answer 4";*/
         
         btnAnswer1 = new JRadioButton(answers[0]);
         btnAnswer2 = new JRadioButton(answers[1]);
@@ -145,7 +150,7 @@ public class Movie101GUI  extends JFrame
         
         setVisible(true);
     }
-    
+    //Brings up the next question once the "Next" button is pressed.
     private void refreshWindow()
     {
         
