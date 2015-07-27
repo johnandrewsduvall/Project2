@@ -104,10 +104,7 @@ public class Movie101GUI  extends JFrame
         btnAnswer2 = new JRadioButton(answers[1]);
         btnAnswer3 = new JRadioButton(answers[2]);
         btnAnswer4 = new JRadioButton(answers[3]);
-        messageLabel = new JLabel(" ");
-        
-        
-        
+        messageLabel = new JLabel(" "); 
         
         window.add(question);
         
@@ -125,9 +122,10 @@ public class Movie101GUI  extends JFrame
         btnNext.setEnabled(false);
         btnSubmit.setEnabled(false);
         
+        window.add(btnSubmit);
         window.add(btnNext);
         window.add(btnQuit);
-        window.add(btnSubmit);
+        
         
         ButtonGroup ansBtnGroup = new ButtonGroup();
         ansBtnGroup.add(btnAnswer1);
@@ -160,7 +158,7 @@ public class Movie101GUI  extends JFrame
         btnNext.setEnabled(false);
         btnSubmit.setEnabled(false);
     }
-    
+    //This method handles all user interactions with the UI
     private class ButtonHandler implements ActionListener, ItemListener
     {
         @Override

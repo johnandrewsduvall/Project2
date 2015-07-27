@@ -62,7 +62,7 @@ public class MovieQuiz implements QuizMaster{
     */
     @Override
     public String processAnswer(String answer) throws EmptyQuestionListException {
-        return questions.processAnswer;
+        return questions.processAnswer();
     }
     /**
     * How many questions has the user answered correctly?
