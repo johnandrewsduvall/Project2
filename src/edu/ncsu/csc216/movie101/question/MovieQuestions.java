@@ -1,3 +1,9 @@
+/*
+ * Author:     John Andrew S Duvall
+ * Date:       (Insert date here)
+ * Project:    (Insert project here)
+ */
+
 package edu.ncsu.csc216.movie101.question;
 
 import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
@@ -16,10 +22,15 @@ public class MovieQuestions {
     public static final String INCORRECT = "Incorrect";
     public static final String SEPERATOR = " ";
     public MovieQuestions(List<StandardQuestion> stdQues,List<ElementaryQuestion> elemQues,List<AdvancedQuestion> advQues) {
-   
+    	
+    	
     }
     public boolean hasMoreQuestions() {
-            return state.hasMoreQuestions();
+        if(state.hasMoreQuestions() == true) {
+        	return true;
+        } else {
+        	return false;
+        }
     }
     public String getCurrentQuestionText() {
         try {
@@ -28,11 +39,11 @@ public class MovieQuestions {
 			return null;
 		}
     }
-    public String[] getCurrentQuestionChoices() throws EmptyQuestionListException {
+    public String[] getCurrentQuestionChoices() {
         try {
 			return state.getCurrentQuestionChoices();
 		} catch (EmptyQuestionListException e) {
-                    throw e;
+			return null;
 		}
     }
     public int getNumCorrectQuestions() {
@@ -40,12 +51,6 @@ public class MovieQuestions {
     }
     public int getNumAttemptedQuestions() {
     	return numAttemptQuestions;
-    }
-    
-    public String processAnswer(String answer) throws EmptyQuestionListException
-    {
-        return state.processAnswer(answer);
-        
     }
     
 
@@ -57,13 +62,13 @@ public class MovieQuestions {
 		}
 
 		
-            @Override
 		public String processAnswer(String ans) throws EmptyQuestionListException {
 			if(ans == advState.getCurrentQuestionAnswer()){
 				numCorrectAnswers++;
 				return CORRECT;
 			} else {
 				numAttemptQuestions++;
+				advState = stdState;
 				return INCORRECT;
 			}
 		}
@@ -78,15 +83,19 @@ public class MovieQuestions {
 		}
 
 		
-            @Override
 		public String processAnswer(String ans) throws EmptyQuestionListException {
 			if(ans == stdState.getCurrentQuestionAnswer()) {
 				numCorrectInARow ++;
 				numCorrectAnswers++;
+				if(numCorrectInARow == 2) {
+					stdState = advState;
+					numCorrectInARow = 0;
+				}
 				return CORRECT;
 			} else {
 				numAttemptQuestions++;
 				numCorrectInARow = 0;
+				stdState = elemState;
 				return INCORRECT;
 			}
 			
@@ -103,17 +112,21 @@ public class MovieQuestions {
 		}
 
 		
-            @Override
 		public String processAnswer(String ans) throws EmptyQuestionListException {
 			if(ans != elemState.getCurrentQuestionAnswer()) {
+				attempts++;
 				numCorrectInARow = 0;
 				numAttemptQuestions++;
-				attempts++;
 				return INCORRECT;
 			} else {
 				numCorrectAnswers++;
 				numCorrectInARow++;
+				if(numCorrectInARow == 2) {
+					elemState = stdState;
+					numCorrectInARow = 0;
+				}
 				return CORRECT;
+				
 			}
 		}
     
