@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/src/edu/ncsu/csc216/movie101/ui/Movie101GUI.java</file>
+            <file>file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/src/edu/ncsu/csc216/movie101/quiz/MovieQuiz.java</file>
+            <file>file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/src/edu/ncsu/csc216/movie101/question/MovieQuestions.java</file>
             <file>file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/src/edu/ncsu/csc216/movie101/quiz/QuizMaster.java</file>
-            <file>file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/src/edu/ncsu/csc216/movie101/util/EmptyQuestionListException.java</file>
             <file>file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/.git/config</file>
         </group>
     </open-files>

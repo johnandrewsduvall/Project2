@@ -35,6 +35,7 @@ public class Movie101GUI  extends JFrame
     private JButton btnQuit = new JButton(QUIT);
     
     private String[] answers = new String[4];
+    private String selectedAnswer;
     private JRadioButton btnAnswer1;
     private JRadioButton btnAnswer2;
     private JRadioButton btnAnswer3;
@@ -79,30 +80,25 @@ public class Movie101GUI  extends JFrame
         setSize(FRAME_WIDTH,FRAME_HEIGHT);
         setTitle(TITLE);
         window = getContentPane();
-        window.setLayout(new GridLayout(0,3,10,10));
+        window.setLayout(new GridLayout(0,1,10,10));
         
         
-        /*
+        
         try {
             String[] answers = quiz.getCurrentQuestionChoices();
             question = new JLabel(quiz.getCurrentQuestionText());
-            labelAnswer1 = new JLabel(answers[0]);
-            labelAnswer2 = new JLabel(answers[1]);
-            labelAnswer3 = new JLabel(answers[2]);
-            labelAnswer4 = new JLabel(answers[3]);
             hint = new JLabel(" ");
             
         } catch (EmptyQuestionListException ex) {
             JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
         }
-        */
+        
         //Test Strings
-        answers[0] = "Answer 1";
+        /*answers[0] = "Answer 1";
         answers[1] = "Answer 2";
         answers[2] = "Answer 3";
-        answers[3] = "Answer 4";
+        answers[3] = "Answer 4";*/
         
-        question = new JLabel("Question!");
         btnAnswer1 = new JRadioButton(answers[0]);
         btnAnswer2 = new JRadioButton(answers[1]);
         btnAnswer3 = new JRadioButton(answers[2]);
@@ -121,14 +117,20 @@ public class Movie101GUI  extends JFrame
         
         window.add(hint);
         
+        ButtonGroup pushBtnGroup = new ButtonGroup();
+        pushBtnGroup.add(btnNext);
+        pushBtnGroup.add(btnQuit);
+        pushBtnGroup.add(btnSubmit);
+        
         window.add(btnNext);
         window.add(btnQuit);
         window.add(btnSubmit);
         
         ButtonGroup ansBtnGroup = new ButtonGroup();
-        ansBtnGroup.add(btnNext);
-        ansBtnGroup.add(btnQuit);
-        ansBtnGroup.add(btnSubmit);
+        ansBtnGroup.add(btnAnswer1);
+        ansBtnGroup.add(btnAnswer2);
+        ansBtnGroup.add(btnAnswer3);
+        ansBtnGroup.add(btnAnswer4);
         
         ButtonHandler btnHandler = new ButtonHandler();
         
@@ -141,6 +143,7 @@ public class Movie101GUI  extends JFrame
     
     private void refreshWindow()
     {
+        
         question.setText("New Question");
         btnAnswer1.setText("New Answer 1");
         btnAnswer2.setText("New Answer 2");
@@ -173,7 +176,22 @@ public class Movie101GUI  extends JFrame
 
         @Override
         public void itemStateChanged(ItemEvent ie) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            if(ie.getSource()==btnAnswer1)
+            {
+                selectedAnswer = answers[0];
+            }
+            else if(ie.getSource()==btnAnswer2)
+            {
+                selectedAnswer = answers[1];
+            }
+            else if(ie.getSource()==btnAnswer3)
+            {
+                selectedAnswer = answers[2];
+            }
+            else if(ie.getSource()==btnAnswer4)
+            {
+                selectedAnswer = answers[3];
+            }
         }
     }
     

@@ -1,21 +1,3 @@
-/*
- * Author:     John Andrew S Duvall
- * Date:       (Insert date here)
- * Project:    (Insert project here)
- */
-
-package edu.ncsu.csc216.movie101.question;
-
-import edu.ncsu.csc216.question_library.*;
-import java.util.LinkedList;
-import java.util.List;
-
-/*
- * Author:     John Andrew S Duvall
- * Date:       (Insert date here)
- * Project:    (Insert project here)
- */
-
 package edu.ncsu.csc216.movie101.question;
 
 import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
@@ -37,11 +19,7 @@ public class MovieQuestions {
    
     }
     public boolean hasMoreQuestions() {
-        if(state.hasMoreQuestions() == true) {
-        	return true;
-        } else {
-        	return false;
-        }
+            return state.hasMoreQuestions();
     }
     public String getCurrentQuestionText() {
         try {
@@ -50,11 +28,11 @@ public class MovieQuestions {
 			return null;
 		}
     }
-    public String[] getCurrentQuestionChoices() {
+    public String[] getCurrentQuestionChoices() throws EmptyQuestionListException {
         try {
 			return state.getCurrentQuestionChoices();
 		} catch (EmptyQuestionListException e) {
-			return null;
+                    throw e;
 		}
     }
     public int getNumCorrectQuestions() {
@@ -62,6 +40,12 @@ public class MovieQuestions {
     }
     public int getNumAttemptedQuestions() {
     	return numAttemptQuestions;
+    }
+    
+    public String processAnswer(String answer) throws EmptyQuestionListException
+    {
+        return state.processAnswer(answer);
+        
     }
     
 
@@ -73,6 +57,7 @@ public class MovieQuestions {
 		}
 
 		
+            @Override
 		public String processAnswer(String ans) throws EmptyQuestionListException {
 			if(ans == advState.getCurrentQuestionAnswer()){
 				numCorrectAnswers++;
@@ -93,6 +78,7 @@ public class MovieQuestions {
 		}
 
 		
+            @Override
 		public String processAnswer(String ans) throws EmptyQuestionListException {
 			if(ans == stdState.getCurrentQuestionAnswer()) {
 				numCorrectInARow ++;
@@ -117,6 +103,7 @@ public class MovieQuestions {
 		}
 
 		
+            @Override
 		public String processAnswer(String ans) throws EmptyQuestionListException {
 			if(ans != elemState.getCurrentQuestionAnswer()) {
 				numCorrectInARow = 0;
