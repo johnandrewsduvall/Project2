@@ -23,11 +23,7 @@ public abstract class QuestionState {
 	public abstract String processAnswer(String ans) throws EmptyQuestionListException;
 	
 	public boolean hasMoreQuestions() {
-		if(questions.iterator().hasNext() == true) {
-			return true;
-		} else {
-			return false;
-		}
+            return questions.iterator().hasNext() == true;
 	}
 	
 	public String getCurrentQuestionText() throws EmptyQuestionListException {
