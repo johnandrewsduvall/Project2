@@ -140,10 +140,10 @@ public class Movie101GUI  extends JFrame
         btnNext.addActionListener(btnHandler);
         btnQuit.addActionListener(btnHandler);
         btnSubmit.addActionListener(btnHandler);
-        btnAnswer1.addActionListener(btnHandler);
-        btnAnswer2.addActionListener(btnHandler);
-        btnAnswer3.addActionListener(btnHandler);
-        btnAnswer4.addActionListener(btnHandler);
+        btnAnswer1.addItemListener(btnHandler);
+        btnAnswer2.addItemListener(btnHandler);
+        btnAnswer3.addItemListener(btnHandler);
+        btnAnswer4.addItemListener(btnHandler);
         
         setVisible(true);
     }
@@ -192,26 +192,26 @@ public class Movie101GUI  extends JFrame
 
         @Override
         public void itemStateChanged(ItemEvent ie) {
-            
+            btnSubmit.setEnabled(true);
             if(ie.getSource()==btnAnswer1)
             {
                 selectedAnswer = answers[0];
-                btnSubmit.setEnabled(true);
+                
             }
             else if(ie.getSource()==btnAnswer2)
             {
                 selectedAnswer = answers[1];
-                btnSubmit.setEnabled(true);
+                
             }
             else if(ie.getSource()==btnAnswer3)
             {
                 selectedAnswer = answers[2];
-                btnSubmit.setEnabled(true);
+                
             }
             else if(ie.getSource()==btnAnswer4)
             {
                 selectedAnswer = answers[3];
-                btnSubmit.setEnabled(true);
+                
             }
         }
     }
