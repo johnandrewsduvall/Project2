@@ -8,7 +8,7 @@ package edu.ncsu.csc216.movie101.question;
 import java.util.List;
 
 import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
-import edu.ncsu.csc216.question_library.Question;
+import edu.ncsu.csc216.question_library.*;
 
 public abstract class QuestionState {
 	
@@ -30,11 +30,7 @@ public abstract class QuestionState {
 	public abstract String processAnswer(String ans) throws EmptyQuestionListException;
 	
 	public boolean hasMoreQuestions() {
-		if(questions.iterator().hasNext() == true) {
-			return true;
-		} else {
-			return false;
-		}
+            return questions.iterator().hasNext() == true;
 	}
 	
 	public String getCurrentQuestionText() throws EmptyQuestionListException {
