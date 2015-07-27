@@ -12,9 +12,9 @@ import edu.ncsu.csc216.question_library.*;
 import java.util.List;
 
 public class MovieQuestions {
-	private QuestionState stdState;
-	private QuestionState advState;
-	private QuestionState elemState;
+	private StandardQuestionState stdState;
+	private AdvancedQuestionState advState;
+	private ElementaryQuestionState elemState;
 	private QuestionState state;
     private int numCorrectAnswers;
     private int numAttemptQuestions;
@@ -22,7 +22,6 @@ public class MovieQuestions {
     public static final String INCORRECT = "Incorrect";
     public static final String SEPERATOR = " ";
     public MovieQuestions(List<StandardQuestion> stdQues,List<ElementaryQuestion> elemQues,List<AdvancedQuestion> advQues) {
-    	
     	
     }
     public boolean hasMoreQuestions() {
@@ -53,6 +52,13 @@ public class MovieQuestions {
     	return numAttemptQuestions;
     }
     
+    public String processAnswer(String ans) throws EmptyQuestionListException {
+    	return state.processAnswer(ans);
+		
+		
+    	
+    	
+    }
 
     public class AdvancedQuestionState extends QuestionState {
     	private List<AdvancedQuestion> advQuestions;
@@ -68,7 +74,7 @@ public class MovieQuestions {
 				return CORRECT;
 			} else {
 				numAttemptQuestions++;
-				advState = stdState;
+				state = stdState;
 				return INCORRECT;
 			}
 		}
@@ -88,14 +94,14 @@ public class MovieQuestions {
 				numCorrectInARow ++;
 				numCorrectAnswers++;
 				if(numCorrectInARow == 2) {
-					stdState = advState;
+					state = advState;
 					numCorrectInARow = 0;
 				}
 				return CORRECT;
 			} else {
 				numAttemptQuestions++;
 				numCorrectInARow = 0;
-				stdState = elemState;
+				state = elemState;
 				return INCORRECT;
 			}
 			
@@ -122,7 +128,7 @@ public class MovieQuestions {
 				numCorrectAnswers++;
 				numCorrectInARow++;
 				if(numCorrectInARow == 2) {
-					elemState = stdState;
+					state = stdState;
 					numCorrectInARow = 0;
 				}
 				return CORRECT;
