@@ -15,7 +15,7 @@ public class MovieQuiz implements QuizMaster{
     private MovieQuestions questions;
     public MovieQuiz(String filename) throws QuestionException {
         reader = new QuestionReader(filename);
-        
+        questions = new MovieQuestions(reader.getStandardQuestions(), reader.getElementaryQuestions(), reader.getAdvancedQuestions());
     }
 
     /**

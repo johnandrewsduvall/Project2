@@ -25,11 +25,7 @@ public class MovieQuestions {
     	
     }
     public boolean hasMoreQuestions() {
-        if(state.hasMoreQuestions() == true) {
-        	return true;
-        } else {
-        	return false;
-        }
+        return state.hasMoreQuestions();
     }
     public String getCurrentQuestionText() {
         try {
