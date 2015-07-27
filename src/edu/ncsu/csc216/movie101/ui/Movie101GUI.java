@@ -39,6 +39,7 @@ public class Movie101GUI  extends JFrame
     
     private String[] answers = new String[4];
     private String selectedAnswer;
+    ButtonGroup ansBtnGroup;
     private JRadioButton btnAnswer1;
     private JRadioButton btnAnswer2;
     private JRadioButton btnAnswer3;
@@ -105,10 +106,10 @@ public class Movie101GUI  extends JFrame
         answers[2] = "Answer 3";
         answers[3] = "Answer 4";*/
         
-        btnAnswer1 = new JRadioButton(answers[0]);
-        btnAnswer2 = new JRadioButton(answers[1]);
-        btnAnswer3 = new JRadioButton(answers[2]);
-        btnAnswer4 = new JRadioButton(answers[3]);
+        btnAnswer1 = new JRadioButton("A"+answers[0]);
+        btnAnswer2 = new JRadioButton("B"+answers[1]);
+        btnAnswer3 = new JRadioButton("C"+answers[2]);
+        btnAnswer4 = new JRadioButton("D"+answers[3]);
         messageLabel = new JLabel(" "); 
         
         window.add(question);
@@ -132,7 +133,7 @@ public class Movie101GUI  extends JFrame
         window.add(btnQuit);
         
         
-        ButtonGroup ansBtnGroup = new ButtonGroup();
+        ansBtnGroup = new ButtonGroup();
         ansBtnGroup.add(btnAnswer1);
         ansBtnGroup.add(btnAnswer2);
         ansBtnGroup.add(btnAnswer3);
@@ -153,7 +154,7 @@ public class Movie101GUI  extends JFrame
     //Brings up the next question once the "Next" button is pressed.
     private void refreshWindow()
     {
-        
+        ansBtnGroup.clearSelection();
         question.setText("New Question");
         btnAnswer1.setText("New Answer 1");
         btnAnswer2.setText("New Answer 2");
@@ -198,22 +199,22 @@ public class Movie101GUI  extends JFrame
             btnSubmit.setEnabled(true);
             if(ie.getSource()==btnAnswer1)
             {
-                selectedAnswer = answers[0];
+                selectedAnswer = "a";
                 
             }
             else if(ie.getSource()==btnAnswer2)
             {
-                selectedAnswer = answers[1];
+                selectedAnswer = "b";
                 
             }
             else if(ie.getSource()==btnAnswer3)
             {
-                selectedAnswer = answers[2];
+                selectedAnswer = "c";
                 
             }
             else if(ie.getSource()==btnAnswer4)
             {
-                selectedAnswer = answers[3];
+                selectedAnswer = "d";
                 
             }
         }
