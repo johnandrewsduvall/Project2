@@ -5,21 +5,22 @@
  */
 
 package edu.ncsu.csc216.movie101.question;
+import java.util.Iterator;
 import java.util.List;
 
 import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
 import edu.ncsu.csc216.question_library.Question;
 
-public abstract class QuestionState<T> extends Question{
+public abstract class QuestionState {
 	
 	private static final int FRONT = 0;
 	
-	private T currentQuestion;
-	private List<T> questions;
+	private Question currentQuestion;
+	private List<Question> questions;
 	
-	public QuestionState(List<T> questions) throws EmptyQuestionListException {
+	public QuestionState(List<Question> questions) throws EmptyQuestionListException {
 		this.questions = questions;
-		currentQuestion = questions.get(FRONT);
+	
 		
 	}
     
@@ -40,26 +41,36 @@ public abstract class QuestionState<T> extends Question{
 	
 	public String[] getCurrentQuestionChoices() throws EmptyQuestionListException {
 		String[] questionChoices = new String[4];
-		questionChoices[FRONT] = ((Question) getCurrentQuestion()).getChoiceA();
-		questionChoices[1] = ((Question) getCurrentQuestion()).getChoiceB();
-		questionChoices[2] = ((Question) getCurrentQuestion()).getChoiceC();
-		questionChoices[3] = ((Question) getCurrentQuestion()).getChoiceD();
+		questionChoices[FRONT] = getCurrentQuestion().getChoiceA();
+		questionChoices[1] = getCurrentQuestion().getChoiceB();
+		questionChoices[2] = getCurrentQuestion().getChoiceC();
+		questionChoices[3] = getCurrentQuestion().getChoiceD();
 		
 		return questionChoices;
 	}
 	
 	public String getCurrentQuestionAnswer() throws EmptyQuestionListException {
 		
-		return ((Question) getCurrentQuestion()).getAnswer();
+		return getCurrentQuestion().getAnswer();
 	}
 	
-	public T getCurrentQuestion() throws EmptyQuestionListException {
+	public Question getCurrentQuestion() throws EmptyQuestionListException {
 		
 		return currentQuestion;
 	}
 	
 	public void nextQuestion() {
-		questions.iterator().next();
+		Iterator<Question> itr = questions.iterator();
+		Question q = itr.next();
+		if(q == currentQuestion) {
+			currentQuestion = itr.next();
+		} else {
+			currentQuestion = q;
+		}
+	}
+	public void setCurrentQuestion(Question q) {
+		currentQuestion = q;
+		
 	}
 	
 	
