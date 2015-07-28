@@ -187,6 +187,7 @@ public class Movie101GUI  extends JFrame
             {
                 try {
                     result = quiz.processAnswer(selectedAnswer);
+                    messageLabel.setText(result);
                 } catch (EmptyQuestionListException ex) {
                     JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
                 }
