@@ -1,14 +1,14 @@
 /*
  * Author:     John Andrew S Duvall
  * Date:       (Insert date here)
- * Project:    (Insert project here).
+ * Project:    (Insert project here)
  */
 
 package edu.ncsu.csc216.movie101.question;
 import java.util.List;
 
 import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
-import edu.ncsu.csc216.question_library.*;
+import edu.ncsu.csc216.question_library.Question;
 
 public abstract class QuestionState {
 	
@@ -21,36 +21,40 @@ public abstract class QuestionState {
 		
 	}
 	
-	public QuestionState(List<Question> questions) {
+	public QuestionState(List<Question> questions) throws EmptyQuestionListException {
 		this.questions = questions;
-		currentQuestion = questions.get(FRONT);
+		setCurrentQuestion(questions.get(2));
 		
 	}
     
 	public abstract String processAnswer(String ans) throws EmptyQuestionListException;
 	
 	public boolean hasMoreQuestions() {
-            return questions.iterator().hasNext() == true;
+		if(questions.iterator().hasNext() == true) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public String getCurrentQuestionText() throws EmptyQuestionListException {
-		return currentQuestion.toString();
+		return getCurrentQuestion().toString();
 	}
 	
 	
 	public String[] getCurrentQuestionChoices() throws EmptyQuestionListException {
 		String[] questionChoices = new String[4];
-		questionChoices[FRONT] = currentQuestion.getChoiceA();
-		questionChoices[1] = currentQuestion.getChoiceB();
-		questionChoices[2] = currentQuestion.getChoiceC();
-		questionChoices[3] = currentQuestion.getChoiceD();
+		questionChoices[FRONT] = getCurrentQuestion().getChoiceA();
+		questionChoices[1] = getCurrentQuestion().getChoiceB();
+		questionChoices[2] = getCurrentQuestion().getChoiceC();
+		questionChoices[3] = getCurrentQuestion().getChoiceD();
 		
 		return questionChoices;
 	}
 	
 	public String getCurrentQuestionAnswer() throws EmptyQuestionListException {
 		
-		return currentQuestion.getAnswer();
+		return getCurrentQuestion().getAnswer();
 	}
 	
 	public Question getCurrentQuestion() throws EmptyQuestionListException {
@@ -60,6 +64,10 @@ public abstract class QuestionState {
 	
 	public void nextQuestion() {
 		questions.iterator().next();
+	}
+
+	public void setCurrentQuestion(Question currentQuestion) {
+		this.currentQuestion = currentQuestion;
 	}
 	
 	
