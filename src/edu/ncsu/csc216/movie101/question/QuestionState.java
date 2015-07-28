@@ -1,7 +1,7 @@
 /*
  * Author:     John Andrew S Duvall
  * Date:       (Insert date here)
- * Project:    (Insert project here)
+ * Project:    (Insert project here).
  */
 
 package edu.ncsu.csc216.movie101.question;
@@ -16,8 +16,15 @@ public abstract class QuestionState {
 	
 	private Question currentQuestion;
 	private List<Question> questions;
+	
+	public QuestionState() {
+		
+	}
+	
 	public QuestionState(List<Question> questions) {
 		this.questions = questions;
+		currentQuestion = questions.get(FRONT);
+		
 	}
     
 	public abstract String processAnswer(String ans) throws EmptyQuestionListException;
@@ -57,4 +64,3 @@ public abstract class QuestionState {
 	
 	
 }
-
