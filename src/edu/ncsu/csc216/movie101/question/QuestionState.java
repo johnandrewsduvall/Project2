@@ -23,7 +23,6 @@ public abstract class QuestionState {
 	
 	public QuestionState(List<Question> questions) throws EmptyQuestionListException {
 		this.questions = questions;
-		setCurrentQuestion(questions.get(2));
 		
 	}
     
