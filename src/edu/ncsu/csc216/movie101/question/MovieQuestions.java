@@ -52,10 +52,15 @@ public class MovieQuestions {
     public int getNumCorrectQuestions() {
     	return numCorrectAnswers;
     }
+    public void incrementNumCorrectQuestions() {
+    	numCorrectAnswers++;
+    }
     public int getNumAttemptedQuestions() {
     	return numAttemptQuestions;
     }
-    
+    public void incrementNumAttemptedQuestions() {
+    	numAttemptQuestions++;
+    }
     public String processAnswer(String ans) throws EmptyQuestionListException {
     	return state.processAnswer(ans);
 		
@@ -74,9 +79,9 @@ public class MovieQuestions {
 
 		
 		public String processAnswer(String ans) throws EmptyQuestionListException {
-			numAttemptQuestions++;
+			incrementNumAttemptedQuestions();
 			if(ans == state.getCurrentQuestionAnswer()){				
-				numCorrectAnswers++;
+				incrementNumCorrectQuestions();
 				state.nextQuestion();
 				return CORRECT;
 			} else {
@@ -97,10 +102,10 @@ public class MovieQuestions {
 
 		
 		public String processAnswer(String ans) throws EmptyQuestionListException {
-			numAttemptQuestions++;
+			incrementNumAttemptedQuestions();
 			if(ans == state.getCurrentQuestionAnswer()) {
 				numCorrectInARow++;
-				numCorrectAnswers++;
+				incrementNumCorrectQuestions();
 				if(numCorrectInARow == 2) {
 					state = advState;
 					numCorrectInARow = 0;
@@ -131,19 +136,20 @@ public class MovieQuestions {
 
 		
 		public String processAnswer(String ans) throws EmptyQuestionListException {
+			incrementNumAttemptedQuestions();
 			if(ans != state.getCurrentQuestionAnswer()) {
 				attempts++;
 				numCorrectInARow = 0;
 				
 				if(attempts == 2) {
-					numAttemptQuestions++;
 					state.nextQuestion();
 					numElemQuesAttempted++;
+					attempts = 0;
 				}
 				return INCORRECT;
 			} else {
 				numElemQuesAttempted++;
-				numCorrectAnswers++;
+				incrementNumCorrectQuestions();
 				numCorrectInARow++;
 				if(numCorrectInARow == 2) {
 					state = stdState;
