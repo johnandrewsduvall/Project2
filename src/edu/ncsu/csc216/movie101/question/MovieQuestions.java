@@ -103,7 +103,9 @@ public class MovieQuestions {
 		
 		public String processAnswer(String ans) throws EmptyQuestionListException {
 			incrementNumAttemptedQuestions();
+
 			if(ans.equals(state.getCurrentQuestionAnswer())) {
+
 				numCorrectInARow++;
 				incrementNumCorrectQuestions();
 				if(numCorrectInARow == 2) {
@@ -137,7 +139,9 @@ public class MovieQuestions {
 		
 		public String processAnswer(String ans) throws EmptyQuestionListException {
 			incrementNumAttemptedQuestions();
+
 			if(!ans.equals(state.getCurrentQuestionAnswer())) {
+
 				attempts++;
 				numCorrectInARow = 0;
 				
