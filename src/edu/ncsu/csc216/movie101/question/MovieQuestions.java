@@ -63,15 +63,17 @@ public class MovieQuestions {
     	private List<AdvancedQuestion> advQuestions;
 		public AdvancedQuestionState(List<AdvancedQuestion> advQuestions) {
 			this.advQuestions = advQuestions;
+			
 		}
 
 		
 		public String processAnswer(String ans) throws EmptyQuestionListException {
-			if(ans == advState.getCurrentQuestionAnswer()){
+			numAttemptQuestions++;
+			if(ans == state.getCurrentQuestionAnswer()){				
 				numCorrectAnswers++;
+				state.nextQuestion();
 				return CORRECT;
 			} else {
-				numAttemptQuestions++;
 				state = stdState;
 				return INCORRECT;
 			}
@@ -91,18 +93,20 @@ public class MovieQuestions {
 
 		
 		public String processAnswer(String ans) throws EmptyQuestionListException {
-			if(ans == stdState.getCurrentQuestionAnswer()) {
-				numCorrectInARow ++;
+			numAttemptQuestions++;
+			if(ans == state.getCurrentQuestionAnswer()) {
+				numCorrectInARow++;
 				numCorrectAnswers++;
 				if(numCorrectInARow == 2) {
 					state = advState;
 					numCorrectInARow = 0;
 				}
+				state.nextQuestion();
 				return CORRECT;
 			} else {
-				numAttemptQuestions++;
 				numCorrectInARow = 0;
 				state = elemState;
+				state.nextQuestion();
 				return INCORRECT;
 			}
 			
@@ -112,6 +116,7 @@ public class MovieQuestions {
     public class ElementaryQuestionState extends QuestionState {
     	private int attempts;
     	private int numCorrectInARow;
+    	private int numElemQuesAttempted = 0;
     	private List<ElementaryQuestion> elemQuestions;
     	public ElementaryQuestionState(List<ElementaryQuestion> elemQuestions) {
 			
@@ -121,12 +126,18 @@ public class MovieQuestions {
 
 		
 		public String processAnswer(String ans) throws EmptyQuestionListException {
-			if(ans != elemState.getCurrentQuestionAnswer()) {
+			if(ans != state.getCurrentQuestionAnswer()) {
 				attempts++;
 				numCorrectInARow = 0;
-				numAttemptQuestions++;
+				elemQuestions.get(numElemQuesAttempted).getHint();
+				if(attempts == 2) {
+					numAttemptQuestions++;
+					state.nextQuestion();
+					numElemQuesAttempted++;
+				}
 				return INCORRECT;
 			} else {
+				numElemQuesAttempted++;
 				numCorrectAnswers++;
 				numCorrectInARow++;
 				if(numCorrectInARow == 2) {
