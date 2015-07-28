@@ -9,6 +9,7 @@ package edu.ncsu.csc216.movie101.question;
 import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
 import edu.ncsu.csc216.question_library.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieQuestions {
@@ -27,10 +28,13 @@ public class MovieQuestions {
 			elemState = new ElementaryQuestionState(elemQues);
     		advState = new AdvancedQuestionState(advQues);
     		state = stdState;
+    		state.setCurrentQuestion(stdQues.get(0));
     	} catch (EmptyQuestionListException e) {
- 			// TODO Auto-generated catch block
  			e.printStackTrace();
  		}
+    	
+    	
+		
     }
     public boolean hasMoreQuestions() {
         return state.hasMoreQuestions();
@@ -69,11 +73,9 @@ public class MovieQuestions {
     	
     }
 
-    @SuppressWarnings("rawtypes")
 	public class AdvancedQuestionState extends QuestionState {
-		@SuppressWarnings("unchecked")
 		public AdvancedQuestionState(List<AdvancedQuestion> advQuestions) throws EmptyQuestionListException {
-			super(advQuestions);
+			super(new ArrayList<Question>(advQuestions));
 			
 		}
 
@@ -86,33 +88,32 @@ public class MovieQuestions {
 				return CORRECT;
 			} else {
 				state = stdState;
+				state.nextQuestion();
 				return INCORRECT;
 			}
 		}
     
     }
-    @SuppressWarnings("rawtypes")
 	public class StandardQuestionState extends QuestionState {
     	private int numCorrectInARow;
-		@SuppressWarnings("unchecked")
 		public StandardQuestionState(List<StandardQuestion> stdQuestions) throws EmptyQuestionListException {
-			super(stdQuestions);
+			super(new ArrayList<Question>(stdQuestions));
 			
 		}
 
 		
 		public String processAnswer(String ans) throws EmptyQuestionListException {
 			incrementNumAttemptedQuestions();
-
 			if(ans.equals(state.getCurrentQuestionAnswer())) {
-
 				numCorrectInARow++;
 				incrementNumCorrectQuestions();
 				if(numCorrectInARow == 2) {
 					state = advState;
 					numCorrectInARow = 0;
+					state.nextQuestion();
+				} else {
+					state.nextQuestion();
 				}
-				state.nextQuestion();
 				return CORRECT;
 			} else {
 				numCorrectInARow = 0;
@@ -124,24 +125,19 @@ public class MovieQuestions {
 		}
     
     }
-    @SuppressWarnings("rawtypes")
 	public class ElementaryQuestionState extends QuestionState {
     	private int attempts;
     	private int numCorrectInARow;
     	private int numElemQuesAttempted = 0;
-    	private List<ElementaryQuestion> elemQuestions;
-    	@SuppressWarnings("unchecked")
-		public ElementaryQuestionState(List<ElementaryQuestion> elemQuestions) throws EmptyQuestionListException {
-			super(elemQuestions);
+    	public ElementaryQuestionState(List<ElementaryQuestion> elemQuestions) throws EmptyQuestionListException {
+			super(new ArrayList<Question>(elemQuestions));
 			
 		}
 
 		
 		public String processAnswer(String ans) throws EmptyQuestionListException {
 			incrementNumAttemptedQuestions();
-
 			if(!ans.equals(state.getCurrentQuestionAnswer())) {
-
 				attempts++;
 				numCorrectInARow = 0;
 				
