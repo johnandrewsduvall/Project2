@@ -11,12 +11,12 @@ public class EmptyQuestionListException extends Exception{
     public EmptyQuestionListException()
             {
                 MESSAGE = "ERROR";
-                serialVersionUID = 0;
+                serialVersionUID = 0L;
             }
     public EmptyQuestionListException(String message)
             {
                 MESSAGE = message;
-                serialVersionUID = 0;
+                serialVersionUID = 0L;
             }
     
 }
