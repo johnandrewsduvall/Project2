@@ -1,7 +1,7 @@
 /*
  * Author:     John Andrew S Duvall
  * Date:       (Insert date here)
- * Project:    (Insert project here).
+ * Project:    (Insert project here)
  */
 
 package edu.ncsu.csc216.movie101.question;
@@ -80,11 +80,13 @@ public class MovieQuestions {
     }
     public class StandardQuestionState extends QuestionState {
     	private int numCorrectInARow;
-    	private List<Question> stdQuestions;
+    	private List<StandardQuestion> stdQuestions;
 		public StandardQuestionState(List<StandardQuestion> stdQuestions) {
-			for(int i = 0; i < stdQuestions.size(); i++) {
-			//	this.stdQuestions.add(i, stdQuestions.get(i));
-			}
+			this.stdQuestions = stdQuestions;
+			
+			setCurrentQuestion(stdQuestions.get(0));
+			
+			
 		}
 
 		
