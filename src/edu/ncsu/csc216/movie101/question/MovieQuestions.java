@@ -22,10 +22,15 @@ public class MovieQuestions {
     public static final String INCORRECT = "Incorrect";
     public static final String SEPERATOR = " ";
     public MovieQuestions(List<StandardQuestion> stdQues,List<ElementaryQuestion> elemQues,List<AdvancedQuestion> advQues) {
-    	stdState = new StandardQuestionState(stdQues);
-    	elemState = new ElementaryQuestionState(elemQues);
-    	advState = new AdvancedQuestionState(advQues);
-    	state = stdState;
+    	try {
+			stdState = new StandardQuestionState(stdQues);
+			elemState = new ElementaryQuestionState(elemQues);
+    		advState = new AdvancedQuestionState(advQues);
+    		state = stdState;
+    	} catch (EmptyQuestionListException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
     }
     public boolean hasMoreQuestions() {
         return state.hasMoreQuestions();
@@ -59,10 +64,11 @@ public class MovieQuestions {
     	
     }
 
-    public class AdvancedQuestionState extends QuestionState {
-    	private List<AdvancedQuestion> advQuestions;
-		public AdvancedQuestionState(List<AdvancedQuestion> advQuestions) {
-			this.advQuestions = advQuestions;
+    @SuppressWarnings("rawtypes")
+	public class AdvancedQuestionState extends QuestionState {
+		@SuppressWarnings("unchecked")
+		public AdvancedQuestionState(List<AdvancedQuestion> advQuestions) throws EmptyQuestionListException {
+			super(advQuestions);
 			
 		}
 
@@ -80,14 +86,12 @@ public class MovieQuestions {
 		}
     
     }
-    public class StandardQuestionState extends QuestionState {
+    @SuppressWarnings("rawtypes")
+	public class StandardQuestionState extends QuestionState {
     	private int numCorrectInARow;
-    	private List<StandardQuestion> stdQuestions;
-		public StandardQuestionState(List<StandardQuestion> stdQuestions) {
-			this.stdQuestions = stdQuestions;
-			
-			setCurrentQuestion(stdQuestions.get(0));
-			
+		@SuppressWarnings("unchecked")
+		public StandardQuestionState(List<StandardQuestion> stdQuestions) throws EmptyQuestionListException {
+			super(stdQuestions);
 			
 		}
 
@@ -113,14 +117,15 @@ public class MovieQuestions {
 		}
     
     }
-    public class ElementaryQuestionState extends QuestionState {
+    @SuppressWarnings("rawtypes")
+	public class ElementaryQuestionState extends QuestionState {
     	private int attempts;
     	private int numCorrectInARow;
     	private int numElemQuesAttempted = 0;
     	private List<ElementaryQuestion> elemQuestions;
-    	public ElementaryQuestionState(List<ElementaryQuestion> elemQuestions) {
-			
-			this.elemQuestions = elemQuestions;
+    	@SuppressWarnings("unchecked")
+		public ElementaryQuestionState(List<ElementaryQuestion> elemQuestions) throws EmptyQuestionListException {
+			super(elemQuestions);
 			
 		}
 
@@ -129,7 +134,7 @@ public class MovieQuestions {
 			if(ans != state.getCurrentQuestionAnswer()) {
 				attempts++;
 				numCorrectInARow = 0;
-				elemQuestions.get(numElemQuesAttempted).getHint();
+				
 				if(attempts == 2) {
 					numAttemptQuestions++;
 					state.nextQuestion();
@@ -144,6 +149,7 @@ public class MovieQuestions {
 					state = stdState;
 					numCorrectInARow = 0;
 				}
+				state.nextQuestion();
 				return CORRECT;
 				
 			}
