@@ -1,7 +1,7 @@
 /*
  * Author:     John Andrew S Duvall
  * Date:       (Insert date here)
- * Project:    (Insert project here).
+ * Project:    (Insert project here)
  */
 
 package edu.ncsu.csc216.movie101.question;
@@ -10,20 +10,16 @@ import java.util.List;
 import edu.ncsu.csc216.movie101.util.EmptyQuestionListException;
 import edu.ncsu.csc216.question_library.Question;
 
-public abstract class QuestionState {
+public abstract class QuestionState<T> extends Question{
 	
 	private static final int FRONT = 0;
 	
-	private Question currentQuestion;
-	private List<Question> questions;
+	private T currentQuestion;
+	private List<T> questions;
 	
-	public QuestionState() {
-		
-	}
-	
-	public QuestionState(List<Question> questions) throws EmptyQuestionListException {
+	public QuestionState(List<T> questions) throws EmptyQuestionListException {
 		this.questions = questions;
-		
+		currentQuestion = questions.get(FRONT);
 		
 	}
     
@@ -44,30 +40,26 @@ public abstract class QuestionState {
 	
 	public String[] getCurrentQuestionChoices() throws EmptyQuestionListException {
 		String[] questionChoices = new String[4];
-		questionChoices[FRONT] = getCurrentQuestion().getChoiceA();
-		questionChoices[1] = getCurrentQuestion().getChoiceB();
-		questionChoices[2] = getCurrentQuestion().getChoiceC();
-		questionChoices[3] = getCurrentQuestion().getChoiceD();
+		questionChoices[FRONT] = ((Question) getCurrentQuestion()).getChoiceA();
+		questionChoices[1] = ((Question) getCurrentQuestion()).getChoiceB();
+		questionChoices[2] = ((Question) getCurrentQuestion()).getChoiceC();
+		questionChoices[3] = ((Question) getCurrentQuestion()).getChoiceD();
 		
 		return questionChoices;
 	}
 	
 	public String getCurrentQuestionAnswer() throws EmptyQuestionListException {
 		
-		return getCurrentQuestion().getAnswer();
+		return ((Question) getCurrentQuestion()).getAnswer();
 	}
 	
-	public Question getCurrentQuestion() throws EmptyQuestionListException {
+	public T getCurrentQuestion() throws EmptyQuestionListException {
 		
 		return currentQuestion;
 	}
 	
 	public void nextQuestion() {
 		questions.iterator().next();
-	}
-
-	public void setCurrentQuestion(Question currentQuestion) {
-		this.currentQuestion = currentQuestion;
 	}
 	
 	
