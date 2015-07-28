@@ -6,8 +6,9 @@
             <file>file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/src/edu/ncsu/csc216/movie101/ui/Movie101GUI.java</file>
             <file>file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/src/edu/ncsu/csc216/movie101/quiz/MovieQuiz.java</file>
             <file>file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/src/edu/ncsu/csc216/movie101/question/MovieQuestions.java</file>
-            <file>file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/src/edu/ncsu/csc216/movie101/quiz/QuizMaster.java</file>
-            <file>file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/.git/config</file>
+            <file>file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/src/edu/ncsu/csc216/movie101/question/QuestionState.java</file>
+            <file>file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/src/edu/ncsu/csc216/movie101/util/EmptyQuestionListException.java</file>
+            <file>jar:file:/C:/Users/Alabastor/Documents/NetBeansProjects/Project2/lib/QuestionLibrary.jar!/testing_readme.txt</file>
         </group>
     </open-files>
 </project-private>

@@ -12,6 +12,8 @@ import java.lang.NullPointerException;
 import edu.ncsu.csc216.question_library.QuestionException;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -152,7 +154,7 @@ public class Movie101GUI  extends JFrame
         setVisible(true);
     }
     //Brings up the next question once the "Next" button is pressed.
-    private void refreshWindow()
+    private void refreshWindow() throws EmptyQuestionListException
     {
         try {
             answers = quiz.getCurrentQuestionChoices();
@@ -162,14 +164,19 @@ public class Movie101GUI  extends JFrame
         }
         ansBtnGroup.clearSelection();
         selectedAnswer = null;
-        question.setText("New Question");
+        question.setText(quiz.getCurrentQuestionText());
         btnAnswer1.setText("A: "+answers[0]);
         btnAnswer2.setText("B: "+answers[1]);
         btnAnswer3.setText("C: "+answers[2]);
         btnAnswer4.setText("D: "+answers[3]);
-        messageLabel.setText("Correct: "+quiz.getNumCorrectQuestions()+" Attempted: "+quiz.getNumCorrectQuestions());
+        messageLabel.setText("Correct: "+quiz.getNumCorrectQuestions()+" Attempted: "+quiz.getNumAttemptedQuestions());
+        
         btnNext.setEnabled(false);
         btnSubmit.setEnabled(false);
+        btnAnswer1.setEnabled(true);
+        btnAnswer2.setEnabled(true);
+        btnAnswer3.setEnabled(true);
+        btnAnswer4.setEnabled(true);
     }
     //This method handles all user interactions with the UI
     private class ButtonHandler implements ActionListener, ItemListener
@@ -183,24 +190,33 @@ public class Movie101GUI  extends JFrame
                 } catch (EmptyQuestionListException ex) {
                     JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
                 }
+                //Enables "Next" button and disables all others except quit
                 btnNext.setEnabled(true);
                 btnSubmit.setEnabled(false);
-                /*try {
-                quiz.processAnswer(TITLE);
-                } catch (EmptyQuestionListException ex) {
-                JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
-                }*/
+                btnAnswer1.setEnabled(false);
+                btnAnswer2.setEnabled(false);
+                btnAnswer3.setEnabled(false);
+                btnAnswer4.setEnabled(false);
             }
             //Actions for the "Next" Button 
             if(ae.getSource().equals(btnNext))
             {
     
-                refreshWindow();
+                try {
+                    if(quiz.hasMoreQuestions())
+                        refreshWindow();
+                    else
+                    {
+                        JOptionPane.showMessageDialog(new JFrame("End of Quiz"), "You Answered "+quiz.getNumCorrectQuestions()+ " questions correctly out of a possible " +quiz.getNumAttemptedQuestions());
+                        stopExecution();
+                    }
+                } catch (EmptyQuestionListException ex) {
+                    JOptionPane.showMessageDialog(new JFrame(), "Invalid file", "Invalid file", JOptionPane.ERROR_MESSAGE);
+                }
             }
             //Actions for the "Quit" button
             if(ae.getSource().equals(btnQuit))
             {
-                //JOptionPane.showMessageDialog(new JFrame("End of Quiz"), "You Answered "+0+ " questions correctly out of a possible " +0);
                 JOptionPane.showMessageDialog(new JFrame("End of Quiz"), "You Answered "+quiz.getNumCorrectQuestions()+ " questions correctly out of a possible " +quiz.getNumAttemptedQuestions());
                 stopExecution();
             }
