@@ -78,7 +78,7 @@ public class Movie101GUI  extends JFrame
         }
         catch(IllegalArgumentException | QuestionException iae)
         {
-            JOptionPane.showMessageDialog(new JFrame(), iae.getMessage(), QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), "Invalid File", QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
         }
         initializeUI();
     }
@@ -96,7 +96,7 @@ public class Movie101GUI  extends JFrame
             question = new JLabel(quiz.getCurrentQuestionText());
             messageLabel = new JLabel(" ");
         } catch (EmptyQuestionListException ex) {
-            JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), "Invalid File", "Inalid File", JOptionPane.ERROR_MESSAGE);
         }
         
         //Test Strings

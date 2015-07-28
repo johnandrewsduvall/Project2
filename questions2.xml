@@ -5,20 +5,20 @@
 		<ChoiceA>Choice a</ChoiceA>
 		<ChoiceB>Choice b</ChoiceB>
 		<ChoiceC>Choice c</ChoiceC>
-		<ChoiceD>The Correct Answer</ChoiceD>
+		<ChoiceD>Choice d</ChoiceD>
 		<Answer>d</Answer>
 	</StandardQuestion>
 	<StandardQuestion>
 		<Question>Standard Question 2</Question>
 		<ChoiceA>Choice a</ChoiceA>
 		<ChoiceB>Choice b</ChoiceB>
-		<ChoiceC>The Correct Answer</ChoiceC>
+		<ChoiceC>Choice c</ChoiceC>
 		<ChoiceD>Choice d</ChoiceD>
 		<Answer>c</Answer>
-	</StandardQuestion>
+	</StandarQuestion>
 	<StandardQuestion>
 		<Question>Standard Question 3</Question>
-		<ChoiceA>The Correct Answer</ChoiceA>
+		<ChoiceA>Choice a</ChoiceA>
 		<ChoiceB>Choice b</ChoiceB>
 		<ChoiceC>Choice c</ChoiceC>
 		<ChoiceD>Choice d</ChoiceD>
@@ -29,7 +29,7 @@
 		<ChoiceA>Choice a</ChoiceA>
 		<ChoiceB>Choice b</ChoiceB>
 		<ChoiceC>Choice c</ChoiceC>
-		<ChoiceD>The Correct Answer</ChoiceD>
+		<ChoiceD>Choice d</ChoiceD>
 		<Answer>d</Answer>
 		<Hint>Here is a hint. The correct answer is d.</Hint>
 	</ElementaryQuestion>
@@ -37,14 +37,14 @@
 		<Question>Elementary Question 2</Question>
 		<ChoiceA>Choice a</ChoiceA>
 		<ChoiceB>Choice b</ChoiceB>
-		<ChoiceC>The Correct Answer</ChoiceC>
+		<ChoiceC>Choice c</ChoiceC>
 		<ChoiceD>Choice d</ChoiceD>
 		<Answer>c</Answer>
 		<Hint>Here is a hint. The correct answer is c.</Hint>
 	</ElementaryQuestion>
 	<ElementaryQuestion>
 		<Question>Elementary Question 1</Question>
-		<ChoiceA>The Correct Answer</ChoiceA>
+		<ChoiceA>Choice a</ChoiceA>
 		<ChoiceB>Choice b</ChoiceB>
 		<ChoiceC>Choice c</ChoiceC>
 		<ChoiceD>Choice d</ChoiceD>
@@ -54,7 +54,7 @@
 	<ElementaryQuestion>
 		<Question>Elementary Question 1</Question>
 		<ChoiceA>Choice a</ChoiceA>
-		<ChoiceB>The Correct Answer</ChoiceB>
+		<ChoiceB>Choice b</ChoiceB>
 		<ChoiceC>Choice c</ChoiceC>
 		<ChoiceD>Choice d</ChoiceD>
 		<Answer>b</Answer>
@@ -65,7 +65,7 @@
 		<ChoiceA>Choice a</ChoiceA>
 		<ChoiceB>Choice b</ChoiceB>
 		<ChoiceC>Choice c</ChoiceC>
-		<ChoiceD>The Correct Answer</ChoiceD>
+		<ChoiceD>Choice d</ChoiceD>
 		<Answer>d</Answer>
 		<Comment>Great work!</Comment>
 	</AdvancedQuestion>
@@ -73,7 +73,7 @@
 		<Question>Advanced Question 1</Question>
 		<ChoiceA>Choice a</ChoiceA>
 		<ChoiceB>Choice b</ChoiceB>
-		<ChoiceC>The Correct Answer</ChoiceC>
+		<ChoiceC>Choice c</ChoiceC>
 		<ChoiceD>Choice d</ChoiceD>
 		<Answer>c</Answer>
 		<Comment>Good job!</Comment>
