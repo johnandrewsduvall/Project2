@@ -83,7 +83,7 @@ public class MovieQuestions {
     	private List<Question> stdQuestions;
 		public StandardQuestionState(List<StandardQuestion> stdQuestions) {
 			for(int i = 0; i < stdQuestions.size(); i++) {
-				this.stdQuestions.add(i, stdQuestions.get(i));
+			//	this.stdQuestions.add(i, stdQuestions.get(i));
 			}
 		}
 
