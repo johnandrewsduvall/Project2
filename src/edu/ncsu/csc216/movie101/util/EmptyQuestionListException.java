@@ -10,7 +10,7 @@ public class EmptyQuestionListException extends Exception{
     private final long serialVersionUID;
     public EmptyQuestionListException()
             {
-                MESSAGE = "ERROR";
+                MESSAGE = "Something went wrong with the questions!";
                 serialVersionUID = 0L;
             }
     public EmptyQuestionListException(String message)
@@ -18,5 +18,14 @@ public class EmptyQuestionListException extends Exception{
                 MESSAGE = message;
                 serialVersionUID = 0L;
             }
-    
+
+    /**
+     *
+     * @return error message
+     */
+    @Override
+    public String getMessage()
+    {
+        return MESSAGE;
+    }
 }

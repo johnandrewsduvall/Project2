@@ -12,8 +12,6 @@ import java.lang.NullPointerException;
 import edu.ncsu.csc216.question_library.QuestionException;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -33,8 +31,6 @@ public class Movie101GUI  extends JFrame
     private static final String NEXT = "Next Question";
     private static final String QUIT = "Quit";
     private static final String QUIZ_ERROR = "Error";
-    
-    private final JLabel SPACER = new JLabel(" ");
     
     private JButton btnSubmit = new JButton(SUBMIT);
     private JButton btnNext = new JButton(NEXT);
@@ -56,10 +52,9 @@ public class Movie101GUI  extends JFrame
     private Container window ;
     
     //Constructor, if the user send the filename in the command line argument, the filename is used.  Otherwise, a file chooser is opened for the user to selection the question xml file.
-    public Movie101GUI(String filename)
+    public Movie101GUI(String filename) throws QuestionException
     {
-        try
-        {
+
             if(filename == null)
             {
                 String userPickFile = null;
@@ -71,17 +66,11 @@ public class Movie101GUI  extends JFrame
                     userPickFile = fc.getSelectedFile().getName();
                 }
                 quiz = new MovieQuiz(userPickFile);
-                
             }
             else
             {
                 quiz = new MovieQuiz(filename);
             }
-        }
-        catch(IllegalArgumentException | QuestionException iae)
-        {
-            JOptionPane.showMessageDialog(new JFrame(), "Invalid File", QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
-        }
         initializeUI();
     }
     //Initial build of GUI
@@ -98,15 +87,8 @@ public class Movie101GUI  extends JFrame
             question = new JLabel(quiz.getCurrentQuestionText());
             messageLabel = new JLabel(" ");
         } catch (EmptyQuestionListException ex) {
-            JOptionPane.showMessageDialog(new JFrame(), "Invalid File", "Inalid File", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), "Something went wrong with the questions", "Error: Bad Questions", JOptionPane.ERROR_MESSAGE);
         }
-        
-        //Test Strings
-        /*question = new JLabel("Question");
-        answers[0] = "Answer 1";
-        answers[1] = "Answer 2";
-        answers[2] = "Answer 3";
-        answers[3] = "Answer 4";*/
         
         btnAnswer1 = new JRadioButton("A: "+answers[0]);
         btnAnswer2 = new JRadioButton("B: "+answers[1]);
@@ -115,13 +97,12 @@ public class Movie101GUI  extends JFrame
         messageLabel = new JLabel(" "); 
         
         window.add(question);
+        window.add(messageLabel);
         
         window.add(btnAnswer1);
         window.add(btnAnswer2);
         window.add(btnAnswer3);
         window.add(btnAnswer4);
-        
-        window.add(messageLabel);
         
         ButtonGroup pushBtnGroup = new ButtonGroup();
         pushBtnGroup.add(btnNext);
@@ -133,7 +114,6 @@ public class Movie101GUI  extends JFrame
         window.add(btnSubmit);
         window.add(btnNext);
         window.add(btnQuit);
-        
         
         ansBtnGroup = new ButtonGroup();
         ansBtnGroup.add(btnAnswer1);
@@ -155,13 +135,10 @@ public class Movie101GUI  extends JFrame
     }
     //Brings up the next question once the "Next" button is pressed.
     private void refreshWindow() throws EmptyQuestionListException
-    {
-        try {
-            answers = quiz.getCurrentQuestionChoices();
-            question.setText(quiz.getCurrentQuestionText());
-        } catch (EmptyQuestionListException ex) {
-            JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), QUIZ_ERROR, JOptionPane.ERROR_MESSAGE);
-        }
+    { 
+        answers = quiz.getCurrentQuestionChoices();
+        question.setText(quiz.getCurrentQuestionText());
+        
         ansBtnGroup.clearSelection();
         selectedAnswer = null;
         question.setText(quiz.getCurrentQuestionText());
@@ -212,7 +189,7 @@ public class Movie101GUI  extends JFrame
                         stopExecution();
                     }
                 } catch (EmptyQuestionListException ex) {
-                    JOptionPane.showMessageDialog(new JFrame(), "Invalid file", "Invalid file", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(new JFrame(), ex.getMessage() , "Error: Bad Questions", JOptionPane.ERROR_MESSAGE);
                 }
             }
             //Actions for the "Quit" button
@@ -228,23 +205,19 @@ public class Movie101GUI  extends JFrame
             btnSubmit.setEnabled(true);
             if(ie.getSource()==btnAnswer1)
             {
-                selectedAnswer = "a";
-                
+                selectedAnswer = "a";    
             }
             else if(ie.getSource()==btnAnswer2)
             {
-                selectedAnswer = "b";
-                
+                selectedAnswer = "b";    
             }
             else if(ie.getSource()==btnAnswer3)
             {
-                selectedAnswer = "c";
-                
+                selectedAnswer = "c";   
             }
             else if(ie.getSource()==btnAnswer4)
             {
-                selectedAnswer = "d";
-                
+                selectedAnswer = "d";   
             }
         }
     }
@@ -258,8 +231,7 @@ public class Movie101GUI  extends JFrame
     {
         Movie101GUI mv101;
         try
-        {
-            
+        {   
             if(args.length > 0)
             {
                 mv101 = new Movie101GUI(args[0]);
@@ -272,14 +244,18 @@ public class Movie101GUI  extends JFrame
         }
         catch(IllegalArgumentException iae)
         {
-            JOptionPane.showMessageDialog(new JFrame(), "Invalid file", "Invalid file", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), "Invalid file, please chose a valid question file", "Error: Invalid file", JOptionPane.ERROR_MESSAGE);
             stopExecution();
         }
         catch(NullPointerException npe)
         {
-            JOptionPane.showMessageDialog(new JFrame(), "Invalid file", "Invalid File", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), "Something was wrong in the data", "Error: Null Pointer", JOptionPane.ERROR_MESSAGE);
             stopExecution();
         }
-        
+        catch(QuestionException qe)
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "Something went wrong with the questions, the question file was bad, or both", "Error: Bad Questions", JOptionPane.ERROR_MESSAGE);
+            stopExecution();
+        }
     }
 }
