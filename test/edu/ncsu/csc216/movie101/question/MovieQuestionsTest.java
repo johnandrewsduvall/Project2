@@ -9,6 +9,8 @@ import org.junit.Test;
 import edu.ncsu.csc216.question_library.AdvancedQuestion;
 import edu.ncsu.csc216.question_library.ElementaryQuestion;
 import edu.ncsu.csc216.question_library.StandardQuestion;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import junit.framework.TestCase;
 
 public class MovieQuestionsTest extends TestCase {
@@ -111,13 +113,15 @@ public class MovieQuestionsTest extends TestCase {
     
     	String[] realChoice;
     	realChoice = mq.getCurrentQuestionChoices();
-    	String expected;
-    	String actual;
-    	
-    	expected = questionChoice.toString();
-    	actual = realChoice.toString();
-    	
-    	assertEquals(expected, actual);
+        assertTrue(Arrays.equals(realChoice, questionChoice));
+        
+        /*String expected;
+        String actual;
+        
+        expected = questionChoice.toString();
+        actual = realChoice.toString();
+        
+        assertEquals(expected, actual);*/
     }
     
     /**
