@@ -85,7 +85,7 @@ public class MovieQuestions {
 			if(ans.equals(state.getCurrentQuestionAnswer())){				
 				incrementNumCorrectQuestions();
 				state.nextQuestion();
-				return CORRECT;
+				return CORRECT + " Good Job!";
 			} else {
 				state = stdState;
 				state.nextQuestion();
@@ -128,32 +128,48 @@ public class MovieQuestions {
 	public class ElementaryQuestionState extends QuestionState {
     	private int attempts;
     	private int numCorrectInARow;
-    	private int numElemQuesAttempted = 0;
+    	private List<ElementaryQuestion> elemQue;
+    	private int hintNumber = 0;
     	public ElementaryQuestionState(List<ElementaryQuestion> elemQuestions) throws EmptyQuestionListException {
-			super(new ArrayList<Question>(elemQuestions));
+    		super(new ArrayList<Question>(elemQuestions));
+    		elemQue = elemQuestions;
+			
 			
 		}
+    	
+    	private String getHint(int index) throws EmptyQuestionListException {
+    		ElementaryQuestion thisQuestion = new ElementaryQuestion();
+    		thisQuestion = elemQue.get(index);
+    		
+			return thisQuestion.getHint();
+    		
+    	}
 
 		
 		public String processAnswer(String ans) throws EmptyQuestionListException {
-			incrementNumAttemptedQuestions();
 			if(!ans.equals(state.getCurrentQuestionAnswer())) {
 				attempts++;
-				numCorrectInARow = 0;
-				
 				if(attempts == 2) {
+					incrementNumAttemptedQuestions();
 					state.nextQuestion();
-					numElemQuesAttempted++;
 					attempts = 0;
+					numCorrectInARow = 0;
+					hintNumber++;
+					return INCORRECT;
+				} else {
+					return INCORRECT + " " + getHint(hintNumber);
 				}
-				return INCORRECT;
+				
 			} else {
-				numElemQuesAttempted++;
+				incrementNumAttemptedQuestions();
 				incrementNumCorrectQuestions();
 				numCorrectInARow++;
+				hintNumber++;
+				attempts = 0;
 				if(numCorrectInARow == 2) {
 					state = stdState;
 					numCorrectInARow = 0;
+					hintNumber = 0;
 				}
 				state.nextQuestion();
 				return CORRECT;

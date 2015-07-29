@@ -35,7 +35,7 @@ public abstract class QuestionState {
 	}
 	
 	public String getCurrentQuestionText() throws EmptyQuestionListException {
-		return getCurrentQuestion().toString();
+		return currentQuestion.getQuestion();
 	}
 	
 	
