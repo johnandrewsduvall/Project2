@@ -165,6 +165,7 @@ public class MovieQuestions {
 				incrementNumCorrectQuestions();
 				numCorrectInARow++;
 				hintNumber++;
+				attempts = 0;
 				if(numCorrectInARow == 2) {
 					state = stdState;
 					numCorrectInARow = 0;
