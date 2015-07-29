@@ -116,14 +116,7 @@ public class MovieQuestionsTest extends TestCase {
     	String[] realChoice;
     	realChoice = mq.getCurrentQuestionChoices();
         assertTrue(Arrays.equals(realChoice, questionChoice));
-        
-        /*String expected;
-        String actual;
-        
-        expected = questionChoice.toString();
-        actual = realChoice.toString();
-        
-        assertEquals(expected, actual);*/
+
     }
     
     /**
