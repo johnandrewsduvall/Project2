@@ -37,12 +37,14 @@ public class MovieQuestionsTest extends TestCase {
 		elemQues1.setChoiceC("Choice c");
 		elemQues1.setChoiceD("Choice d");
 		elemQues1.setQuestion("Elementary Question 1");
+		elemQues1.setHint("The answer is d");
 		elemQues2.setAnswer("c");
 		elemQues2.setChoiceA("Choice a");
 		elemQues2.setChoiceB("Choice b");
 		elemQues2.setChoiceC("Choice c");
 		elemQues2.setChoiceD("Choice d");
 		elemQues2.setQuestion("Elementary Question 2");
+		elemQues2.setHint("The answer is c");
 		elemQues.add(0, elemQues1);
 		elemQues.add(1, elemQues2);
 		stdQues1 = new StandardQuestion();
@@ -126,36 +128,34 @@ public class MovieQuestionsTest extends TestCase {
     
     /**
      * Test of getNumCorrectQuestions method, of class MovieQuestions.
-     *
+     */
 
     public void testGetNumCorrectQuestions() {
-    	
+    	assertEquals(0, mq.getNumCorrectQuestions());
+    	mq.incrementNumCorrectQuestions();
+    	assertEquals(1, mq.getNumCorrectQuestions());
     }
     
     /**
      * Test of getNumAttemptedQuestions method, of class MovieQuestions.
-     *
+     */
 
     public void testGetNumAttemptedQuestions() {
-    	
+    	assertEquals(0, mq.getNumAttemptedQuestions());
+    	mq.incrementNumAttemptedQuestions();
+    	assertEquals(1, mq.getNumAttemptedQuestions());
     }
     
     /**
      * Test of processAnswer method, of class MovieQuestions.
-     *
-
+     */
+    @Test
     public void testProcessAnswer() throws Exception {
+    	assertEquals("Incorrect", mq.processAnswer("d"));
+    	assertEquals("Correct!", mq.processAnswer("d"));
+    	assertEquals("Incorrect The answer is c", mq.processAnswer("d"));
     	
     }
-    
-    
-    */
-    
-    
-    
-    
-    
-    
 
 }
 
