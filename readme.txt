@@ -3,7 +3,7 @@ by Jesse Steinberg (jmsteinb) and John Andrew Duvall  (jsduvall)
 
 ||Packages||
 edu.ncsu.csc216.movie101.question
--Contains classes for builing questions and controlling the execution and sequence of the quiz.
+-Contains classes for building questions and controlling the execution and sequence of the quiz.
 
 	||Classes||
 	MovieQuestions
@@ -19,14 +19,14 @@ edu.ncsu.csc216.movie101.question
 		-Nested class that builds and defines elementary level questions
 
 edu.ncsu.csc216.movie101.quiz
--Coordintes between the front end UI and the backend elements of the question package as well and sending the filename to the question_libaray package and receving the question lists back from the question_library package.
+-Coordinates between the front end UI and the back-end elements of the question package as well and sending the filename to the question_libaray package and receving the question lists back from the question_library package.
 
 	||Classes||
 	MovieQuiz
 	-Class containing the logic for the package, implements QuizMaster
 
 	QuizMaster
-	-providedinterface defining methods used by MovieQuiz
+	-provided interface defining methods used by MovieQuiz
 
 edu.ncsu.csc216.movie101.ui
 -Contains the graphical user interface for the quiz.
