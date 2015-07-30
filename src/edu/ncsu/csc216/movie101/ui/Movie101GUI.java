@@ -65,6 +65,11 @@ public class Movie101GUI  extends JFrame
                 {
                     userPickFile = fc.getSelectedFile().getName();
                 }
+                else if(userPickFile == null)
+                {
+                    JOptionPane.showMessageDialog(new JFrame(), "No file selected", "No File Selected", JOptionPane.ERROR_MESSAGE);
+                    stopExecution();
+                }
                 quiz = new MovieQuiz(userPickFile);
             }
             else
